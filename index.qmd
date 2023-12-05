@@ -1,0 +1,41 @@
+---
+title: "Jack Helrigel"
+about:
+  template: trestles  # jolla  trestles  solana  marquee  broadside
+  image: PROFILE PIC.JPG
+  image-width: 16em
+  image-shape: rectangle # rectangle  round  rounded
+  
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com
+    - icon: instagram
+      text: Instagram
+      href: https://instagram.com
+    - icon: github
+      text: GitHub
+      href: https://github.com
+    - icon: file-earmark-pdf
+      text: Resumé
+      href: https://GITHUB_USERNAME.github.io/resume-example.pdf
+    - icon: mailbox
+      text: Email
+      href: mailto:YOUR_EMAIL@geneseo.edu
+
+---
+
+
+Jack Helrigel majors in Finance at SUNY Geneseo. When not working on Finance, Jack enjoys spending time with freinds aswell as playing golf and working out. 
+
+## Education
+
+State University of New York at Geneseo | Geneseo, NY <br>
+B.S. in Finance | Aug 2022 - May 2026 <br>
+
+
+## Experience
+
+Private Contracting | Golds Gym Employee | May 2024 - Aug 2024
+
+
