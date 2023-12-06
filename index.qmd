@@ -21,7 +21,7 @@ about:
       href: https://GITHUB_USERNAME.github.io/resume-example.pdf
     - icon: mailbox
       text: Email
-      href: mailto:YOUR_EMAIL@geneseo.edu
+      href: mailto:jbh8@geneseo.edu
 
 ---
 
