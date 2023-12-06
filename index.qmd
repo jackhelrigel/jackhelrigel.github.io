@@ -9,13 +9,13 @@ about:
   links:
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com
+      href: https://www.linkedin.com/in/jack-helrigel-415737209/
     - icon: instagram
       text: Instagram
-      href: https://instagram.com
+      href: https://www.instagram.com/jackhelrigel/
     - icon: github
       text: GitHub
-      href: https://github.com
+      href: https://github.com/jackhelrigel
     - icon: file-earmark-pdf
       text: Resumé
       href: https://GITHUB_USERNAME.github.io/resume-example.pdf
