@@ -1,0 +1,25 @@
+---
+title: "Welcome To My Blog"
+author: "Jack Helrigel"
+date: "2023-12-11"
+categories: [news]
+---
+
+This is my very first post in a Quarto blog. Welcome!
+
+![](ABOUT.png)
+
+My name is Jack Helrigel I am a Sophmore at SUNY Geneseo with a major in Finance. I grew in a small beach town on the north Shore of Long Island called Northport. I enjoy spending my free time with freinds and family. 
+
+![](LAX.jpg)
+
+I am on the Mens lacrosse team at Suny Geneseo. Being actvie and healthy is a huge part of my life and playing lacrosse with people i have met here allows me to do that. The connections and relationships that being on the team has brought me will last a lifetime. 
+
+![](RAGS.jpeg)
+
+Growing up i have been an avid New York Rangers Hockey fan. My two olders brother and my dad have instilled this following from when i was a young kid. This is my favirite professional sports team to watch and i will have a passionate support for this team for my whole life. 
+
+
+
+
+
