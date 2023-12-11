@@ -1,0 +1,15 @@
+---
+title: "NFL in 2022"
+author: "Jack Helrigel"
+date: "2023-12-11"
+category: "Data Analytics"
+image: "NFL.jpeg"
+---
+![](NFL.jpeg)
+Question 2. NFL in 2022
+Add a blog post with your answers for Question 2 to your website (https://YOUR_GITHUB_USERNAME.github.io/).
+Make sure that your blog post for Question 2 includes all the questionnaires and your answers to them.
+Make sure that your blog post for Question 2 has a section for each sub-question (e.g., Q2a, Q2b) in Question 2, so that the Table of Contents display the section for each questionnaire.
+The following is the data.frame for Question 2.
+
+

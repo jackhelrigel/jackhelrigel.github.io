@@ -2,7 +2,7 @@
 title: "Welcome To My Blog"
 author: "Jack Helrigel"
 date: "2023-12-11"
-categories: [news]
+categories: [News]
 ---
 
 This is my very first post in a Quarto blog. Welcome!
