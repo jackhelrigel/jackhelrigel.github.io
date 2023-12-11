@@ -1,7 +1,7 @@
 ---
 title: "Jack Helrigel"
 about:
-  template: trestles  # jolla  trestles  solana  marquee  broadside
+  template: solana  # jolla  trestles  solana  marquee  broadside
   image: PROFILE PIC.JPG
   image-width: 16em
   image-shape: rectangle # rectangle  round  rounded
