@@ -2,7 +2,7 @@
 title: "NFL in 2022"
 author: "Jack Helrigel"
 date: "2023-12-11"
-category: "Data Analytics"
+categories: [Data Analysis]
 image: "NFL.jpeg"
 
 execute: 
