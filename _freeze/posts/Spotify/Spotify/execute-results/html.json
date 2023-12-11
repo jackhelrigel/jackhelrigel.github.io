@@ -1,8 +1,10 @@
 {
-  "hash": "61649d40d7eaab87f8be11195d1905ee",
+  "hash": "9d448aae92b370228e8d7ba92c8a46af",
   "result": {
-    "markdown": "---\ntitle: \"Spotify\"\nauthor: \"Jack Helrigel\"\ndate: \"2023-12-11\"\ncategories: [Data Analysis]\nimage: \"SPOTIFY.jpeg\"\n---\n\n\nThis is a post with executable code.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 2\n```\n:::\n:::\n",
-    "supporting": [],
+    "markdown": "---\ntitle: \"Spotify\"\nauthor: \"Jack Helrigel\"\ndate: \"2023-12-11\"\ncategories: [Data Analysis]\nimage: \"SPOTIFY.jpeg\"\n---\n\n\n![](SPOTIFY.jpeg)\n\nProvide both (1) ggplot codes and (2) a couple of sentences to describe the relationship between pos and the ten most popular artists.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\n```\n\n::: {.cell-output .cell-output-stderr}\n```\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.0\n✔ ggplot2   3.4.3     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors\n```\n:::\n\n```{.r .cell-code}\nlibrary(skimr)\n\nspotify_all <- read.csv('https://bcdanl.github.io/data/spotify_all.csv')\n\nQ1c <- spotify_all %>% \n  group_by(artist_name) %>% \n  mutate(n_popular_artist = n()) %>% \n  ungroup() %>% \n  mutate( artist_ranking = dense_rank( desc(n_popular_artist) ) ) %>% \n  filter( artist_ranking <= 10) \n  \n# boxplot\nggplot(Q1c,\n       aes(x = pos, y = fct_reorder(artist_name, -artist_ranking)) ) +\n  geom_boxplot() +\n  stat_summary(\n    fun = mean,\n    color = 'red'\n  )\n```\n\n::: {.cell-output .cell-output-stderr}\n```\nWarning: Removed 10 rows containing missing values (`geom_segment()`).\n```\n:::\n\n::: {.cell-output-display}\n![](Spotify_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n# histogram\nggplot(Q1c) +\n  geom_histogram(aes(x = pos), binwidth = 1) + \n  facet_grid(fct_reorder(artist_name, artist_ranking) ~ .  , switch = \"y\") +\n  theme(strip.text.y.left = element_text(angle = 0))\n```\n\n::: {.cell-output-display}\n![](Spotify_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n",
+    "supporting": [
+      "Spotify_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

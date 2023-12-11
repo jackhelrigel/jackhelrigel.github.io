@@ -6,8 +6,39 @@ categories: [Data Analysis]
 image: "SPOTIFY.jpeg"
 ---
 
-This is a post with executable code.
+![](SPOTIFY.jpeg)
+
+Provide both (1) ggplot codes and (2) a couple of sentences to describe the relationship between pos and the ten most popular artists.
 
 ```{r}
-1 + 1
+
+library(tidyverse)
+library(skimr)
+
+spotify_all <- read.csv('https://bcdanl.github.io/data/spotify_all.csv')
+
+Q1c <- spotify_all %>% 
+  group_by(artist_name) %>% 
+  mutate(n_popular_artist = n()) %>% 
+  ungroup() %>% 
+  mutate( artist_ranking = dense_rank( desc(n_popular_artist) ) ) %>% 
+  filter( artist_ranking <= 10) 
+  
+# boxplot
+ggplot(Q1c,
+       aes(x = pos, y = fct_reorder(artist_name, -artist_ranking)) ) +
+  geom_boxplot() +
+  stat_summary(
+    fun = mean,
+    color = 'red'
+  )
 ```
+
+```{r}
+# histogram
+ggplot(Q1c) +
+  geom_histogram(aes(x = pos), binwidth = 1) + 
+  facet_grid(fct_reorder(artist_name, artist_ranking) ~ .  , switch = "y") +
+  theme(strip.text.y.left = element_text(angle = 0))
+```
+

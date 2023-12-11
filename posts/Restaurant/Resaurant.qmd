@@ -2,7 +2,7 @@
 title: "Restaurant Inspection"
 author: "Jack Helrigel"
 date: "2023-12-11"
-categories: [data analysis]
+categories: [Data Analysis]
 image: "RESTAURANT.jpeg"
 
 execute: 

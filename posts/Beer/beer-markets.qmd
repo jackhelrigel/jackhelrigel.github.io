@@ -1,0 +1,74 @@
+---
+title: "Beer Markets"
+author: "Jack Helrigel"
+date: "2023-12-11"
+categories: [Data Analysis]
+image: "BEER.jpeg"
+
+execute: 
+  warning: false
+  message: false
+  
+toc: true
+---
+
+![](BEER.jpeg)
+```{r}
+library(tidyverse)
+library(skimr)
+beer_mkts <- read_csv('https://bcdanl.github.io/data/beer_markets.csv')
+rmarkdown::paged_table(beer_mkts)
+```
+Question 1. 
+- For each household, calculate the number of beer transactions.
+- For each household, calculate the proportion of each beer brand choice.
+
+```{r}
+q2c <- beer_mkts %>% 
+  count(hh, brand) %>% 
+  group_by(hh) %>% 
+  mutate(n_tot = sum(n)) %>%  # n_tot : the number of beer transactions
+  arrange(hh, brand) %>% 
+  mutate( prop = n / n_tot ) # prop: the proportion of each beer brand choice
+
+q2c
+```
+
+Question 2.
+- For households that purchased BUD LIGHT at least once, what fraction of households did purchase only BUD LIGHT?
+- For households that purchased BUSCH LIGHT at least once, what fraction of households did purchase only BUSCH LIGHT?
+- For households that purchased COORS LIGHT at least once, what fraction of households did purchase only COORS LIGHT?
+- For households that purchased MILLER LITE at least once, what fraction of households did purchase only MILLER LITE?
+- For households that purchased NATURAL LIGHT at least once, what fraction of households did purchase only NATURAL LIGHT?
+Which beer brand does have the largest proportion of such loyal consumers?
+```{r}
+q2b <- beer_mkts %>% 
+  mutate(bud = ifelse(brand=="BUD LIGHT", 1, 0), # 1 if brand=="BUD LIGHT"; 0 otherwise
+         busch = ifelse(brand=="BUSCH LIGHT", 1, 0),
+         coors = ifelse(brand=="COORS LIGHT", 1, 0),
+         miller = ifelse(brand=="MILLER LITE", 1, 0),
+         natural = ifelse(brand=="NATURAL LIGHT", 1, 0),
+         .after = hh) %>% 
+  select(hh:natural) %>%  # select the variables we need
+  group_by(hh) %>% 
+  summarise(n_transactions = n(), # number of beer transactions for each hh
+            n_bud = sum(bud), # number of BUD LIGHT transactions for each hh
+            n_busch = sum(busch), 
+            n_coors = sum(coors), 
+            n_miller = sum(miller), 
+            n_natural = sum(natural) 
+  ) %>% 
+  summarise(loyal_bud = sum(n_transactions == n_bud) / sum(n_bud > 0), 
+              # sum(n_transactions == n_bud) : the number of households that purchased BUD LIGHT only
+              # sum(n_bud > 0) : the number of households that purchased BUD LIGHT at least once.
+            loyal_busch = sum(n_transactions == n_busch) / sum(n_busch > 0),
+            loyal_coors = sum(n_transactions == n_coors) / sum(n_coors > 0),
+            loyal_miller = sum(n_transactions == n_miller) / sum(n_miller > 0),
+            loyal_natural = sum(n_transactions == n_natural) / sum(n_natural > 0)
+  )
+
+q2b
+```
+
+
+ 
