@@ -1,0 +1,14 @@
+---
+title: "Restaurant Inspection"
+author: "Jack Helrigel"
+date: "2023-12-11"
+categories: [data analysis]
+image: ""
+
+execute: 
+  warning: false
+  message: false
+  
+toc: true
+
+![]()
