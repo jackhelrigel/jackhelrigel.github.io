@@ -102,7 +102,7 @@
     "href": "blog-listing.html",
     "title": "Jack Helrigel’s Blog",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\n\n\nDec 11, 2023\n\n\nJack Helrigel\n\n\n1 min\n\n\n\n\n\n\n  \n\n\n\n\nBeer Markets\n\n\n\n\n\n\n\n\n\nNov 2, 2023\n\n\nByeong-Hak Choe\n\n\n9 min\n\n\n\n\n\n\n  \n\n\n\n\nStarwars\n\n\n\n\n\n\n\n\n\nOct 30, 2023\n\n\nYour Name\n\n\n3 min\n\n\n\n\n\n\n  \n\n\n\n\nPost With Code\n\n\n\n\n\n\n\n\n\nOct 30, 2023\n\n\nYOUR NAME\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\n\n\nDec 11, 2023\n\n\nJack Helrigel\n\n\n1 min\n\n\n\n\n\n\n  \n\n\n\n\nSpotify\n\n\n\n\n\n\n\n\n\nDec 11, 2023\n\n\nJack Helrigel\n\n\n1 min\n\n\n\n\n\n\n  \n\n\n\n\nRestaurant Inspection\n\n\n\n\n\n\n\n\n\nDec 11, 2023\n\n\nJack Helrigel\n\n\n1 min\n\n\n\n\n\n\n  \n\n\n\n\nBeer Markets\n\n\n\n\n\n\n\n\n\nNov 2, 2023\n\n\nByeong-Hak Choe\n\n\n9 min\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "project.html",
@@ -152,5 +152,19 @@
     "title": "Welcome To My Blog",
     "section": "",
     "text": "This is my very first post in a Quarto blog. Welcome!\n\nMy name is Jack Helrigel I am a Sophmore at SUNY Geneseo with a major in Finance. I grew in a small beach town on the north Shore of Long Island called Northport. I enjoy spending my free time with freinds and family.\n\nI am on the Mens lacrosse team at Suny Geneseo. Being actvie and healthy is a huge part of my life and playing lacrosse with people i have met here allows me to do that. The connections and relationships that being on the team has brought me will last a lifetime.\n\nGrowing up i have been an avid New York Rangers Hockey fan. My two olders brother and my dad have instilled this following from when i was a young kid. This is my favirite professional sports team to watch and i will have a passionate support for this team for my whole life."
+  },
+  {
+    "objectID": "posts/Restaurant/Resaurant.html",
+    "href": "posts/Restaurant/Resaurant.html",
+    "title": "Restaurant Inspection",
+    "section": "",
+    "text": "Provide ggplot code to describe how the distribution of SCORE varies by GRADE and CRITICAL FLAG.\nUsing Boxplots, Histograms and Histograms with varying x- scale across facets.\nAnswer: Boxplots\n\nrestaurant &lt;- read.csv('https://bcdanl.github.io/data/DOHMH_NYC_Restaurant_Inspection.csv')\n\n\nlibrary(tidyverse)\nlibrary(skimr)\n\n\nggplot(restaurant) +\n  geom_boxplot(aes(x = SCORE, y = GRADE, fill = GRADE) ) +\n  facet_grid( CRITICAL.FLAG ~ . )\n\n\n\n\nAnswer: Histograms\n\nggplot(restaurant) +\n  geom_histogram(aes(x = SCORE), binwidth = 1 ) +\n  facet_grid(CRITICAL.FLAG ~ GRADE )\n\n\n\n\nAnswer: Histograms with varying x- scale across facets\n\nggplot(restaurant) +\n  geom_histogram(aes(x = SCORE), binwidth = 1 ) +\n  facet_grid(CRITICAL.FLAG ~ GRADE, scales = 'free_x' )"
+  },
+  {
+    "objectID": "posts/Spotify/Spotify.html",
+    "href": "posts/Spotify/Spotify.html",
+    "title": "Spotify",
+    "section": "",
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
   }
 ]

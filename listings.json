@@ -3,9 +3,9 @@
     "listing": "/blog-listing.html",
     "items": [
       "/posts/welcome/Welcome.html",
-      "/posts/beer-markets/beer-markets.html",
-      "/posts/starwars/Resaurant.html",
-      "/posts/post-with-code/index.html"
+      "/posts/Spotify/Spotify.html",
+      "/posts/Restaurant/Resaurant.html",
+      "/posts/beer-markets/beer-markets.html"
     ]
   }
 ]

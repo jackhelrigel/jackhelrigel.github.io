@@ -1,0 +1,16 @@
+{
+  "hash": "1007efdb6d934f72b6f63ec499170edf",
+  "result": {
+    "markdown": "---\ntitle: \"Restaurant Inspection\"\nauthor: \"Jack Helrigel\"\ndate: \"2023-12-11\"\ncategories: [data analysis]\nimage: \"RESTAURANT.jpeg\"\n\nexecute: \n  warning: false\n  message: false\n  \ntoc: true\n---\n\n\n![](RESTAURANT.jpeg)\n\nProvide ggplot code to describe how the distribution of SCORE varies by GRADE and CRITICAL FLAG.\n\nUsing Boxplots, Histograms and Histograms with varying x- scale across facets. \n\nAnswer: Boxplots\n\n::: {.cell}\n\n```{.r .cell-code}\nrestaurant <- read.csv('https://bcdanl.github.io/data/DOHMH_NYC_Restaurant_Inspection.csv')\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(skimr)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(restaurant) +\n  geom_boxplot(aes(x = SCORE, y = GRADE, fill = GRADE) ) +\n  facet_grid( CRITICAL.FLAG ~ . )\n```\n\n::: {.cell-output-display}\n![](Resaurant_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n\nAnswer: Histograms \n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(restaurant) +\n  geom_histogram(aes(x = SCORE), binwidth = 1 ) +\n  facet_grid(CRITICAL.FLAG ~ GRADE )\n```\n\n::: {.cell-output-display}\n![](Resaurant_files/figure-html/unnamed-chunk-4-1.png){width=672}\n:::\n:::\n\n\nAnswer: Histograms with varying x- scale across facets\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(restaurant) +\n  geom_histogram(aes(x = SCORE), binwidth = 1 ) +\n  facet_grid(CRITICAL.FLAG ~ GRADE, scales = 'free_x' )\n```\n\n::: {.cell-output-display}\n![](Resaurant_files/figure-html/unnamed-chunk-5-1.png){width=672}\n:::\n:::\n",
+    "supporting": [
+      "Resaurant_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

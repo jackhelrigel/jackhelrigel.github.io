@@ -1,0 +1,13 @@
+---
+title: "Spotify"
+author: "Jack Helrigel"
+date: "2023-12-11"
+categories: [Data Analysis]
+image: "SPOTIFY.jpeg"
+---
+
+This is a post with executable code.
+
+```{r}
+1 + 1
+```
