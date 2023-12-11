@@ -4,12 +4,27 @@ author: "Jack Helrigel"
 date: "2023-12-11"
 category: "Data Analytics"
 image: "NFL.jpeg"
+
+execute: 
+  warning: false
+  message: false
+  
+toc: true
 ---
+
 ![](NFL.jpeg)
-Question 2. NFL in 2022
-Add a blog post with your answers for Question 2 to your website (https://YOUR_GITHUB_USERNAME.github.io/).
-Make sure that your blog post for Question 2 includes all the questionnaires and your answers to them.
-Make sure that your blog post for Question 2 has a section for each sub-question (e.g., Q2a, Q2b) in Question 2, so that the Table of Contents display the section for each questionnaire.
-The following is the data.frame for Question 2.
+
+# Question 2. NFL in 2022
+
+- Add a blog post with your answers for Question 2 to your website (https://YOUR_GITHUB_USERNAME.github.io/).
+  - Make sure that your blog post for Question 2 includes all the questionnaires and your answers to them.
+  - Make sure that your blog post for Question 2 has a section for each sub-question (e.g., Q2a, Q2b) in Question 2, so that the Table of Contents display the section for each questionnaire.
+- The following is the data.frame for Question 2.
+
+```{r}
+NFL2022_stuffs <- read.csv('https://bcdanl.github.io/data/NFL2022_stuffs.csv')
+```
+
+- NFL2022_stuffs is the data.frame that contains information about NFL games in year 2022, in which the unit of observation is a single play for each drive in a NFL game.
 
 
