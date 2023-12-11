@@ -174,6 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#question-2.-nfl-in-2022" id="toc-question-2.-nfl-in-2022" class="nav-link active" data-scroll-target="#question-2.-nfl-in-2022">Question 2. NFL in 2022</a></li>
+  <li><a href="#variable-description" id="toc-variable-description" class="nav-link" data-scroll-target="#variable-description">Variable Description 🏈</a></li>
   </ul>
 </nav>
     </div>
@@ -199,6 +200,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <ul>
 <li>NFL2022_stuffs is the data.frame that contains information about NFL games in year 2022, in which the unit of observation is a single play for each drive in a NFL game.</li>
+</ul>
+</section>
+<section id="variable-description" class="level1">
+<h1>Variable Description 🏈</h1>
+<ul>
+<li>play_id: Numeric play identifier that when used with game_id and drive provides the unique identifier for a single play</li>
+<li>game_id: Ten digit identifier for NFL game.</li>
+<li>drive: Numeric drive number in the game.</li>
+<li>week: Season week.</li>
+<li>posteam: String abbreviation for the team with possession.</li>
+<li>qtr: Quarter of the game (5 is overtime).</li>
+<li>half_seconds_remaining: Numeric seconds remaining in the half.</li>
+<li>down: The down for the given play.
+<ul>
+<li>Basically you get four attempts (aka downs) to move the ball 10 yards (by either running with it or passing it).</li>
+<li>If you make 10 yards then you get another set of four downs.</li>
+</ul></li>
+<li>pass: Binary indicator if the play was a pass play.</li>
+<li>wp: Estimated winning probability for the posteam given the current situation at the start of the given play.</li>
 </ul>
 
 

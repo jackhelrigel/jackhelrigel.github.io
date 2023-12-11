@@ -28,3 +28,20 @@ NFL2022_stuffs <- read.csv('https://bcdanl.github.io/data/NFL2022_stuffs.csv')
 - NFL2022_stuffs is the data.frame that contains information about NFL games in year 2022, in which the unit of observation is a single play for each drive in a NFL game.
 
 
+# Variable Description 🏈
+
+- play_id: Numeric play identifier that when used with game_id and drive provides the unique identifier for a single play
+- game_id: Ten digit identifier for NFL game.
+- drive: Numeric drive number in the game.
+- week: Season week.
+- posteam: String abbreviation for the team with possession.
+- qtr: Quarter of the game (5 is overtime).
+- half_seconds_remaining: Numeric seconds remaining in the half.
+- down: The down for the given play.
+  - Basically you get four attempts (aka downs) to move the ball 10 yards (by either running with it or passing it).
+  - If you make 10 yards then you get another set of four downs.
+- pass: Binary indicator if the play was a pass play.
+- wp: Estimated winning probability for the posteam given the current situation at the start of the given play.
+
+
+
