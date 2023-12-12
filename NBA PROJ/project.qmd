@@ -63,17 +63,21 @@ The data.frame `NBAsal` contains a data from the 2022-2023 NBA season. It contai
 ```{r}
 NBAsal <-read_csv("nba_salaries.csv")
 ```
-
 ```{r}
 #| results: asis
 #| echo: false
-rmarkdown::paged_table(mpg) 
+rmarkdown::paged_table(NBAsal)
 ```
 
 
 ```{r}
-skim(mpg) %>% 
+skim(NBAsal) %>% 
   select(-n_missing)
+```
+
+
+```{r}
+
 ```
 
 

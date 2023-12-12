@@ -12,11 +12,11 @@ website:
       - text: Blog
         href: blog-listing.qmd
   page-footer: 
-    center: "Powered with GitHub and Quarto<br>© YOUR NAME, 2023"
+    center: "Powered with GitHub and Quarto<br>© JACK HELRIGEL, 2023"
 
 format:
   html:
-    theme: 
+    theme:
       light: flatly
       dark: darkly
     mainfont: system-ui; 
@@ -25,3 +25,4 @@ format:
     toc: false
     include-after-body: target_blank.html
     
+
