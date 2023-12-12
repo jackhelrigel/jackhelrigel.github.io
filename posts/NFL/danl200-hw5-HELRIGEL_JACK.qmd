@@ -16,7 +16,7 @@ toc: true
 
 # Question 2. NFL in 2022
 
-- Add a blog post with your answers for Question 2 to your website (https://YOUR_GITHUB_USERNAME.github.io/).
+- Add a blog post with your answers for Question 2 to your website (https://jackhelrigel.github.io/).
   - Make sure that your blog post for Question 2 includes all the questionnaires and your answers to them.
   - Make sure that your blog post for Question 2 has a section for each sub-question (e.g., Q2a, Q2b) in Question 2, so that the Table of Contents display the section for each questionnaire.
 - The following is the data.frame for Question 2.
@@ -126,5 +126,69 @@ NFL2022_stuffs_EPA <- left_join(NFL2022_stuffs, NFL2022_epa, by = c("play_id", "
 
 NFL2022_stuffs_EPA <- NFL2022_stuffs_EPA %>%
   filter(!is.na(passer))
+```
+
+# Q2E 
+
+- Provide both (1) a single ggplot and (2) a simple comment to describe the NFL weekly trend of weekly mean value of epa for each of the following two passers,
+  1. “J.Allen”
+  2. “P.Mahomes”
+
+```{r}
+two_passers <- c("J.Allen", "P.Mahomes")
+
+filtered_twopassers <- NFL2022_stuffs_EPA %>% 
+  filter(passer %in% two_passers)
+
+mean_epa_data <- filtered_twopassers %>% group_by(week, passer) %>% 
+  summarise(mean_epa = mean(epa, na.rm = TRUE))
+
+ggplot(mean_epa_data, aes(x= week, y= mean_epa, color = passer))+
+  geom_line()+
+  scale_color_manual(values =c("J.Allen" ="blue", "P.Mahomes"="red"))+
+  labs(x= "Week",
+       y= "Mean value of expected points added (EPA)")
+```
+Comment: Patrick Mahomes generally had a higher mean value of epa. However, there were a few weeks that Josh Allen had a higher mean value of epa.
+
+# Q2F
+
+Calculate the difference between the mean value of epa for “J.Allen” the mean value of epa for “P.Mahomes” for each value of week.
+
+```{r}
+difference_epa <- mean_epa_data %>% 
+  pivot_wider(names_from = passer, values_from = mean_epa)
+
+difference_epa$epa_differnce <- difference_epa$'J.Allen' - difference_epa$'P.Mahomes'
+
+print(difference_epa)
+```
+
+# Q2G
+
+- Summarize the resulting data.frame in Q2d, with the following four variables:
+  - posteam: String abbreviation for the team with possession.
+  - passer: Name of the player who passed a ball to a receiver by initially taking a three-step drop, and backpedaling into the pocket to make a pass. (Mostly, they are quarterbacks.)
+  - mean_epa: Mean value of epa in 2022 for each passer
+  - n_pass: Number of observations for each passer
+- Then find the top 10 NFL passers in 2022 in terms of the mean value of epa, conditioning that n_pass must be greater than or equal to the third quantile level of n_pass.
+
+```{r}
+summary_data <- NFL2022_stuffs_EPA %>%
+  group_by(posteam, passer) %>%
+  summarise(
+    mean_epa = mean(epa, na.rm = TRUE),
+    n_pass = n()
+  )
+
+quantile_threshold_passer <- quantile(summary_data$n_pass, 0.75)
+filtered_summary_data <- summary_data %>%
+  filter(n_pass >= quantile_threshold_passer)
+
+top_10_passers <- filtered_summary_data %>%
+  arrange(desc(mean_epa)) %>% 
+  head(n=10)
+  
+top_10_passers
 ```
 

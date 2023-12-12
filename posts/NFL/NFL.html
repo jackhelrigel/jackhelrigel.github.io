@@ -179,6 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#q2b" id="toc-q2b" class="nav-link" data-scroll-target="#q2b">Q2B</a></li>
   <li><a href="#q2c" id="toc-q2c" class="nav-link" data-scroll-target="#q2c">Q2C</a></li>
   <li><a href="#q2d" id="toc-q2d" class="nav-link" data-scroll-target="#q2d">Q2D</a></li>
+  <li><a href="#q2e" id="toc-q2e" class="nav-link" data-scroll-target="#q2e">Q2E</a></li>
   </ul>
 </nav>
     </div>
@@ -330,6 +331,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>NFL2022_stuffs_EPA <span class="ot">&lt;-</span> NFL2022_stuffs_EPA <span class="sc">%&gt;%</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(passer))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="q2e" class="level1">
+<h1>Q2E</h1>
+<ul>
+<li>Provide both (1) a single ggplot and (2) a simple comment to describe the NFL weekly trend of weekly mean value of epa for each of the following two passers,
+<ol type="1">
+<li>“J.Allen”</li>
+<li>“P.Mahomes”</li>
+</ol></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>two_passers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"J.Allen"</span>, <span class="st">"P.Mahomes"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>filtered_twopassers <span class="ot">&lt;-</span> NFL2022_stuffs_EPA <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(passer <span class="sc">%in%</span> two_passers)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>mean_epa_data <span class="ot">&lt;-</span> filtered_twopassers <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(week, passer) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_epa =</span> <span class="fu">mean</span>(epa, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mean_epa_data, <span class="fu">aes</span>(<span class="at">x=</span> week, <span class="at">y=</span> mean_epa, <span class="at">color =</span> passer))<span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span><span class="fu">c</span>(<span class="st">"J.Allen"</span> <span class="ot">=</span><span class="st">"blue"</span>, <span class="st">"P.Mahomes"</span><span class="ot">=</span><span class="st">"red"</span>))<span class="sc">+</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">"Week"</span>,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span> <span class="st">"Mean value of expected points added (EPA)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="NFL_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Comment: Patrick Mahomes generally had a higher mean value of epa. However, there were a few weeks that Josh Allen had a higher mean value of epa.</p>
 
 
 </section>
