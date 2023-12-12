@@ -2,5 +2,5 @@
 title: "danl200-hw5-HELRIGEL-JACK.qmd"
 editor: visual
 author: jack helrigel
-
+---
 

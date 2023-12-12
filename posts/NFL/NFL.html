@@ -175,6 +175,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#question-2.-nfl-in-2022" id="toc-question-2.-nfl-in-2022" class="nav-link active" data-scroll-target="#question-2.-nfl-in-2022">Question 2. NFL in 2022</a></li>
   <li><a href="#variable-description" id="toc-variable-description" class="nav-link" data-scroll-target="#variable-description">Variable Description 🏈</a></li>
+  <li><a href="#q2a" id="toc-q2a" class="nav-link" data-scroll-target="#q2a">Q2A</a></li>
+  <li><a href="#q2b" id="toc-q2b" class="nav-link" data-scroll-target="#q2b">Q2B</a></li>
+  <li><a href="#q2c" id="toc-q2c" class="nav-link" data-scroll-target="#q2c">Q2C</a></li>
+  <li><a href="#q2d" id="toc-q2d" class="nav-link" data-scroll-target="#q2d">Q2D</a></li>
   </ul>
 </nav>
     </div>
@@ -220,6 +224,112 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>pass: Binary indicator if the play was a pass play.</li>
 <li>wp: Estimated winning probability for the posteam given the current situation at the start of the given play.</li>
 </ul>
+</section>
+<section id="q2a" class="level1">
+<h1>Q2A</h1>
+<p>In data.frame, NFL2022_stuffs, remove observations for which values of posteam is missing.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>q2a <span class="ot">&lt;-</span> NFL2022_stuffs <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(posteam))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="q2b" class="level1">
+<h1>Q2B</h1>
+<p>Summarize the mean value of pass for each posteam when all the following conditions hold:</p>
+<ol type="1">
+<li>wp is greater than 20% and less than 75%;</li>
+<li>down is less than or equal to 2; and</li>
+<li>half_seconds_remaining is greater than 120.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>q2b <span class="ot">&lt;-</span> NFL2022_stuffs <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(wp, <span class="fl">0.2</span>, <span class="fl">0.75</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>         down <span class="sc">&lt;=</span> <span class="dv">2</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>         half_seconds_remaining <span class="sc">&gt;</span> <span class="dv">120</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>meanvalq2b <span class="ot">&lt;-</span> q2b <span class="sc">%&gt;%</span> </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(posteam) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_pass =</span> <span class="fu">mean</span>(pass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>meanvalq2b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 32 × 2
+   posteam mean_pass
+   &lt;chr&gt;       &lt;dbl&gt;
+ 1 ARI         0.553
+ 2 ATL         0.4  
+ 3 BAL         0.520
+ 4 BUF         0.604
+ 5 CAR         0.458
+ 6 CHI         0.420
+ 7 CIN         0.657
+ 8 CLE         0.491
+ 9 DAL         0.474
+10 DEN         0.493
+# ℹ 22 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="q2c" class="level1">
+<h1>Q2C</h1>
+<ul>
+<li>Provide both (1) a ggplot code with geom_point() using the resulting data.frame in Q2b and (2) a simple comments to describe the mean value of pass for each posteam.
+<ul>
+<li>In the ggplot, reorder the posteam categories based on the mean value of pass in ascending or in descending order.</li>
+</ul>
+≈</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>meanvaldesc <span class="ot">&lt;-</span> meanvalq2b <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean_pass))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(meanvaldesc, <span class="fu">aes</span>(<span class="at">x =</span> mean_pass, <span class="at">y =</span> <span class="fu">reorder</span>(posteam, mean_pass))) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">"Percentage of Pass Plays"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span> <span class="st">"Team with possesion"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="NFL_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Comments: - Cincinnati, Kansas City, Los Angeles Chargers, Buffalo Bills, and Philadelphia eagles had the top 5 highest average percentage of pass plays during the 2022 season. - Atlanta, Washington, Chicago, New Orleans, and Tennessee had the top 5 lowest average percentage of pass plays during the 2022 season.</p>
+</section>
+<section id="q2d" class="level1">
+<h1>Q2D</h1>
+<ul>
+<li>Consider the following data.frame, NFL2022_epa:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>NFL2022_epa <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'https://bcdanl.github.io/data/NFL2022_epa.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Variable description for NFL2022_epa
+<ul>
+<li>play_id: Numeric play identifier that when used with game_id and drive provides the unique identifier for a single play</li>
+<li>game_id: Ten digit identifier for NFL game.</li>
+<li>drive: Numeric drive number in the game.</li>
+<li>posteam: String abbreviation for the team with possession.</li>
+<li>passer: Name of the player who passed a ball to a receiver by initially taking a three-step drop and backpedaling into the pocket to make a pass. (Mostly, they are quarterbacks)</li>
+<li>receiver: Name of the receiver.</li>
+<li>epa: Expected points added (EPA) by the posteam for the given play.</li>
+</ul></li>
+<li>Create the data.frame, NFL2022_stuffs_EPA, that includes
+<ol type="1">
+<li>All the variables in the data.frame, NFL2022_stuffs;</li>
+<li>The variables, passer, receiver, and epa, from the data.frame, NFL2022_epa. by joining the two data.frames.</li>
+</ol></li>
+<li>In the resulting data.frame, NFL2022_stuffs_EPA, remove observations with NA in passer.</li>
+</ul>
+<p>Answer:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>NFL2022_stuffs_EPA <span class="ot">&lt;-</span> <span class="fu">left_join</span>(NFL2022_stuffs, NFL2022_epa, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"play_id"</span>, <span class="st">"game_id"</span>, <span class="st">"drive"</span>, <span class="st">"posteam"</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>NFL2022_stuffs_EPA <span class="ot">&lt;-</span> NFL2022_stuffs_EPA <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(passer))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>
