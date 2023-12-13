@@ -151,7 +151,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">2</span> Data</a>
   <ul class="collapse">
   <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics"><span class="header-section-number">2.1</span> Summary Statistics</a></li>
-  <li><a href="#mpg-and-a-type-of-cars" id="toc-mpg-and-a-type-of-cars" class="nav-link" data-scroll-target="#mpg-and-a-type-of-cars"><span class="header-section-number">2.2</span> MPG and a Type of Cars</a></li>
+  <li><a href="#top-players-and-points-per-game" id="toc-top-players-and-points-per-game" class="nav-link" data-scroll-target="#top-players-and-points-per-game"><span class="header-section-number">2.2</span> Top Players and Points Per Game</a></li>
+  <li><a href="#points-per-game-and-salary" id="toc-points-per-game-and-salary" class="nav-link" data-scroll-target="#points-per-game-and-salary"><span class="header-section-number">2.3</span> Points Per Game and Salary</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -686,18 +687,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="mpg-and-a-type-of-cars" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="mpg-and-a-type-of-cars"><span class="header-section-number">2.2</span> MPG and a Type of Cars</h2>
-<p>The following boxplot shows how the distribution of highway MPG (<code>hwy</code>) varies by a type of cars (<code>class</code>) <span class="emoji" data-emoji="blue_car">🚙</span> <span class="emoji" data-emoji="truck">🚚</span> <span class="emoji" data-emoji="minibus">🚐</span>.</p>
+<section id="top-players-and-points-per-game" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="top-players-and-points-per-game"><span class="header-section-number">2.2</span> Top Players and Points Per Game</h2>
+<p>The following shows the top 10 players during the NBA 2022-2023 season based on the number of points per game.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> hwy, <span class="at">fill =</span> class),</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">show.legend =</span> F) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Class"</span>, <span class="at">y =</span> <span class="st">"Highway</span><span class="sc">\n</span><span class="st">MPG"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>top_10_players <span class="ot">&lt;-</span> NBAsal <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(PTS) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(PTS)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(PTS,<span class="at">.before =</span> Position)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>top_10_players</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 32
+# Groups:   PTS [10]
+    ...1 `Player Name` Salary   PTS Position   Age Team     GP    GS    MP    FG
+   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1    27 Joel Embiid   3.36e7  33.1 C           28 PHI      66    66  34.6  11  
+ 2     9 Damian Lilla… 4.25e7  32.2 PG          32 POR      58    58  36.3   9.6
+ 3    34 Shai Gilgeou… 3.09e7  31.4 PG          24 OKC      68    68  35.5  10.4
+ 4     8 Giannis Ante… 4.25e7  31.1 PF          28 MIL      63    63  32.1  11.2
+ 5    37 Jayson Tatum  3.04e7  30.1 SF          24 BOS      74    74  36.9   9.8
+ 6     0 Stephen Curry 4.81e7  29.4 PG          34 GSW      56    56  34.7  10  
+ 7     4 Kevin Durant  4.41e7  29.1 PF          34 BRK/…    47    47  35.6  10.3
+ 8     3 LeBron James  4.45e7  28.9 PF          38 LAL      55    54  35.5  11.1
+ 9    33 Donovan Mitc… 3.09e7  28.3 SG          26 CLE      68    68  35.8  10  
+10    25 Devin Booker  3.38e7  27.8 SG          26 PHO      53    53  34.6   9.9
+# ℹ 21 more variables: FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `3P` &lt;dbl&gt;, `3PA` &lt;dbl&gt;,
+#   `3P%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;, `2P%` &lt;dbl&gt;, `eFG%` &lt;dbl&gt;, FT &lt;dbl&gt;,
+#   FTA &lt;dbl&gt;, `FT%` &lt;dbl&gt;, ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;,
+#   STL &lt;dbl&gt;, BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;, `Player-additional` &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>Comments:</p>
+<ul>
+<li>Joel Embiid, Damian Lillard, Shai Gilgeous-Alexander, Giannis Antetokounmpo, Jayson Tatum, Stephen Curry, Kevin Durant, Lebron James, Donovan Mitchell, and Devin Booker are the top 10 players based on points per game for the 2022-2023 NBA season</li>
+</ul>
+</section>
+<section id="points-per-game-and-salary" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="points-per-game-and-salary"><span class="header-section-number">2.3</span> Points Per Game and Salary</h2>
+<p>Provide both ggplot codes and a couple of sentences to describe the relationship between salary and points per game.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(NBAsal, <span class="fu">aes</span>(<span class="at">x=</span> PTS, <span class="at">y=</span> Salary))<span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="project_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="864"></p>
 </div>
 </div>
+<p>Comments:</p>
+<ul>
+<li><p>The plot above shows us that during 2022-2023 season players that had a higher average points per game generally had a higher salary than players that had a lower average points per game.</p></li>
+<li><p>This implies that players that score more points per game are generally considered more valuable to a franchise which is why they are paid more.</p></li>
+</ul>
 
 
 </section>

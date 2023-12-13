@@ -110,5 +110,19 @@
     "title": "DANL Project",
     "section": "2.2 MPG and a Type of Cars",
     "text": "2.2 MPG and a Type of Cars\nThe following boxplot shows how the distribution of highway MPG (hwy) varies by a type of cars (class) 🚙 🚚 🚐.\n\nggplot(data = mpg) +\n  geom_boxplot(aes(x = class, y = hwy, fill = class),\n               show.legend = F) +\n  labs(x = \"Class\", y = \"Highway\\nMPG\")"
+  },
+  {
+    "objectID": "project.html#top-players-and-points-per-game",
+    "href": "project.html#top-players-and-points-per-game",
+    "title": "DANL Project",
+    "section": "2.2 Top Players and Points Per Game",
+    "text": "2.2 Top Players and Points Per Game\nThe following shows the top 10 players during the NBA 2022-2023 season based on the number of points per game.\n\ntop_10_players &lt;- NBAsal %&gt;% \n  group_by(PTS) %&gt;% \n  arrange(desc(PTS)) %&gt;% \n  head(10) %&gt;% \n  relocate(PTS,.before = Position)\n  \ntop_10_players\n\n# A tibble: 10 × 32\n# Groups:   PTS [10]\n    ...1 `Player Name` Salary   PTS Position   Age Team     GP    GS    MP    FG\n   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1    27 Joel Embiid   3.36e7  33.1 C           28 PHI      66    66  34.6  11  \n 2     9 Damian Lilla… 4.25e7  32.2 PG          32 POR      58    58  36.3   9.6\n 3    34 Shai Gilgeou… 3.09e7  31.4 PG          24 OKC      68    68  35.5  10.4\n 4     8 Giannis Ante… 4.25e7  31.1 PF          28 MIL      63    63  32.1  11.2\n 5    37 Jayson Tatum  3.04e7  30.1 SF          24 BOS      74    74  36.9   9.8\n 6     0 Stephen Curry 4.81e7  29.4 PG          34 GSW      56    56  34.7  10  \n 7     4 Kevin Durant  4.41e7  29.1 PF          34 BRK/…    47    47  35.6  10.3\n 8     3 LeBron James  4.45e7  28.9 PF          38 LAL      55    54  35.5  11.1\n 9    33 Donovan Mitc… 3.09e7  28.3 SG          26 CLE      68    68  35.8  10  \n10    25 Devin Booker  3.38e7  27.8 SG          26 PHO      53    53  34.6   9.9\n# ℹ 21 more variables: FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `3P` &lt;dbl&gt;, `3PA` &lt;dbl&gt;,\n#   `3P%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;, `2P%` &lt;dbl&gt;, `eFG%` &lt;dbl&gt;, FT &lt;dbl&gt;,\n#   FTA &lt;dbl&gt;, `FT%` &lt;dbl&gt;, ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;,\n#   STL &lt;dbl&gt;, BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;, `Player-additional` &lt;chr&gt;\n\n\nComments:\n\nJoel Embiid, Damian Lillard, Shai Gilgeous-Alexander, Giannis Antetokounmpo, Jayson Tatum, Stephen Curry, Kevin Durant, Lebron James, Donovan Mitchell, and Devin Booker are the top 10 players based on points per game for the 2022-2023 NBA season"
+  },
+  {
+    "objectID": "project.html#points-per-game-and-salary",
+    "href": "project.html#points-per-game-and-salary",
+    "title": "DANL Project",
+    "section": "2.3 Points Per Game and Salary",
+    "text": "2.3 Points Per Game and Salary\nProvide both ggplot codes and a couple of sentences to describe the relationship between salary and points per game.\n\nggplot(NBAsal, aes(x= PTS, y= Salary))+\n  geom_point()+\n  geom_smooth(method = \"lm\", se = FALSE, color = \"blue\")\n\n\n\n\nComments:\n\nThe plot above shows us that during 2022-2023 season players that had a higher average points per game generally had a higher salary than players that had a lower average points per game.\nThis implies that players that score more points per game are generally considered more valuable to a franchise which is why they are paid more."
   }
 ]

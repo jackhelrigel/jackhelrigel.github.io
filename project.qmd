@@ -76,20 +76,36 @@ skim(NBAsal) %>%
 ```
 
 
-```{r}
-
-```
-
-
-## MPG and a Type of Cars
-The following boxplot shows how the distribution of highway MPG (`hwy`) varies by a type of cars (`class`) :blue_car: :truck: :minibus:.
-
+## Top Players and Points Per Game
+The following shows the top 10 players during the NBA 2022-2023 season based on the number of points per game.
 
 ```{r}
-ggplot(data = mpg) +
-  geom_boxplot(aes(x = class, y = hwy, fill = class),
-               show.legend = F) +
-  labs(x = "Class", y = "Highway\nMPG") 
+top_10_players <- NBAsal %>% 
+  group_by(PTS) %>% 
+  arrange(desc(PTS)) %>% 
+  head(10) %>% 
+  relocate(PTS,.before = Position)
+  
+top_10_players
 ```
 
+Comments:
 
+  - Joel Embiid, Damian Lillard, Shai Gilgeous-Alexander, Giannis Antetokounmpo, Jayson Tatum, Stephen Curry, Kevin Durant, Lebron James, Donovan Mitchell, and Devin Booker are the top 10 players based on points per game for the 2022-2023 NBA season
+
+## Points Per Game and Salary
+
+Provide both ggplot codes and a couple of sentences to describe the relationship between salary and points per game.
+
+```{r}
+ggplot(NBAsal, aes(x= PTS, y= Salary))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE, color = "blue")
+```
+
+Comments:
+
+  - The plot above shows us that during 2022-2023 season players that had a higher average points per game generally had a higher salary than players that had a lower average points per game.
+
+  - This implies that players that score more points per game are generally considered more valuable to a franchise which is why they are paid more.
+  
