@@ -153,6 +153,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics"><span class="header-section-number">2.1</span> Summary Statistics</a></li>
   <li><a href="#top-players-and-points-per-game" id="toc-top-players-and-points-per-game" class="nav-link" data-scroll-target="#top-players-and-points-per-game"><span class="header-section-number">2.2</span> Top Players and Points Per Game</a></li>
   <li><a href="#points-per-game-and-salary" id="toc-points-per-game-and-salary" class="nav-link" data-scroll-target="#points-per-game-and-salary"><span class="header-section-number">2.3</span> Points Per Game and Salary</a></li>
+  <li><a href="#top-fg" id="toc-top-fg" class="nav-link" data-scroll-target="#top-fg"><span class="header-section-number">2.4</span> Top FG %</a></li>
+  <li><a href="#mp-minutes-per-game-vs-tov-turnovers" id="toc-mp-minutes-per-game-vs-tov-turnovers" class="nav-link" data-scroll-target="#mp-minutes-per-game-vs-tov-turnovers"><span class="header-section-number">2.5</span> MP (minutes per game) Vs TOV (turnovers) 🗑️</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">2.6</span> Conclusion 🏅🏀👟</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -739,6 +742,84 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><p>The plot above shows us that during 2022-2023 season players that had a higher average points per game generally had a higher salary than players that had a lower average points per game.</p></li>
 <li><p>This implies that players that score more points per game are generally considered more valuable to a franchise which is why they are paid more.</p></li>
+</ul>
+</section>
+<section id="top-fg" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="top-fg"><span class="header-section-number">2.4</span> Top FG %</h2>
+<ul>
+<li><p>Find the ten highest FG% Values of players who have attmpted more than 15 Field Goal Attempts per game</p>
+<ul>
+<li>FG% is the ratio of field goals made to field goals attempted</li>
+<li>Generally a higher field goal percentage denotes higher efficiency.</li>
+<li>A FG% of .500 (50%) or above is considered a good percentage, although it depends on the position.</li>
+</ul></li>
+<li><p>Who are the players for those top 10 FG% values?</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>top_FG_Percentage <span class="ot">&lt;-</span> NBAsal <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">FG%</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(FGA <span class="sc">&gt;</span> <span class="dv">15</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">FG%</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(<span class="st">`</span><span class="at">FG%</span><span class="st">`</span>, <span class="at">.before =</span> Position) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(FGA, <span class="at">.before =</span> Position)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>top_FG_Percentage</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 32
+# Groups:   FG% [9]
+    ...1 `Player Name` Salary `FG%`   FGA Position   Age Team     GP    GS    MP
+   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1    94 Zion William… 1.35e7 0.608  16.2 PF          22 NOP      29    29  33  
+ 2    14 Anthony Davis 3.80e7 0.563  17.2 C           29 LAL      56    54  34  
+ 3     4 Kevin Durant  4.41e7 0.56   18.3 PF          34 BRK/…    47    47  35.6
+ 4     8 Giannis Ante… 4.25e7 0.553  20.3 PF          28 MIL      63    63  32.1
+ 5    27 Joel Embiid   3.36e7 0.548  20.1 C           28 PHI      66    66  34.6
+ 6     6 Kawhi Leonard 4.25e7 0.512  16.8 SF          31 LAC      52    50  33.6
+ 7    39 De'Aaron Fox  3.04e7 0.512  18.2 PG          25 SAC      73    73  33.4
+ 8    34 Shai Gilgeou… 3.09e7 0.51   20.3 PG          24 OKC      68    68  35.5
+ 9     5 Bradley Beal  4.33e7 0.506  17.6 SG          29 WAS      50    50  33.5
+10    45 DeMar DeRozan 2.73e7 0.504  17.6 SF          33 CHI      74    74  36.2
+# ℹ 21 more variables: FG &lt;dbl&gt;, `3P` &lt;dbl&gt;, `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;,
+#   `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;, `2P%` &lt;dbl&gt;, `eFG%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;,
+#   `FT%` &lt;dbl&gt;, ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;,
+#   BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;, `Player-additional` &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>Comments:</p>
+<ul>
+<li><p>Zion Williamson, Anthony Davis, Kevin Durant, Giannis Antetokounmpo, Joel Embiid, Kawhi Leonard, De’Aaron Fox, Shai Gilgeous-Alexander, Bradley Beal, Demar DeRozan have the highest FG% for players with more than 15 attempts per game.</p></li>
+<li><p>All these players have a FG% above a .50 which means they are considered highly efficient</p></li>
+</ul>
+</section>
+<section id="mp-minutes-per-game-vs-tov-turnovers" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="mp-minutes-per-game-vs-tov-turnovers"><span class="header-section-number">2.5</span> MP (minutes per game) Vs TOV (turnovers) 🗑️</h2>
+<p>Provide both ggplot codes and a couple of sentences to describe the relationship between Minutes Played Per Game and Turnovers for the top 10 players based on Points Per Game.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(top_10_players, <span class="fu">aes</span>(<span class="at">x=</span> MP, <span class="at">y=</span> TOV))<span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"blue"</span>)<span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span><span class="st">`</span><span class="at">Player Name</span><span class="st">`</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="project_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
+<p>Comments:</p>
+<ul>
+<li><p>Giannis Antetokounmpo played the least amount of minutes per game, but had the most turnovers per game. This makes sense as Giannis is the primary ball handler for his team, therfore there is more opportunity for him to turnover the ball</p></li>
+<li><p>Devin Booker, Donovan Mitchell, Jayson Tatum, and Shai Gilgeous-Alexander all play around 35-37 minutes per game and turnover the ball the least out of those 10 players</p></li>
+<li><p>Stephen Curry, Lebron James, and Kevin Durant all play similar minutes and turnover the ball at a similar rate</p>
+<ul>
+<li>They are all older in age and play similar minutes due to load management. They turnover the ball at an almost identical rate per game.</li>
+</ul></li>
+</ul>
+</section>
+<section id="conclusion" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">2.6</span> Conclusion 🏅🏀👟</h2>
+<ul>
+<li><p>Our exploration of NBA player salaries and performance unveiled key insights, emphasizing the pivotal role of scoring in determining player value.</p></li>
+<li><p>Efficient players like Zion Williamson and Kevin Durant, with high field goal percentages, stood out.</p></li>
+<li><p>Analyzing minutes played and turnovers for the top 10 players highlighted patterns, revealing challenges for primary ball handlers and consistency among players like Devin Booker and Donovan Mitchell.</p></li>
 </ul>
 
 
