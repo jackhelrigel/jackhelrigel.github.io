@@ -6,7 +6,7 @@ author:
   - Name Owen Ellick
   - Name Luca Schettino
   - Name Jake Starkey
-
+  - Link to written report [HERE](https://docs.google.com/document/d/1PIdpg7YCZtPYctY_V33T99nsJR-nDUNOgsO6zHg_Le8/edit)
 toc: true
 toc-title: "Table of Contents"
 toc-depth: 2
