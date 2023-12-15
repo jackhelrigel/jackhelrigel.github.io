@@ -17,7 +17,7 @@ website:
 format:
   html:
     theme:
-      light: flatly
+      light: spacelab
       dark: darkly
     mainfont: system-ui; 
     highlight-style: atom-one
