@@ -22,20 +22,14 @@ about:
     - icon: mailbox
       text: Email
       href: mailto:jbh8@geneseo.edu
-
 ---
 
-
-Jack Helrigel majors in Finance at SUNY Geneseo. When not working on Finance, Jack enjoys spending time with freinds aswell as playing golf and working out. 
+Jack Helrigel majors in Finance at SUNY Geneseo. When not working on Finance, Jack enjoys spending time with freinds aswell as playing golf and working out.
 
 ## Education
 
-State University of New York at Geneseo | Geneseo, NY <br>
-B.S. in Finance | Aug 2022 - May 2026 <br>
-
+State University of New York at Geneseo \| Geneseo, NY <br> B.S. in Finance \| Aug 2022 - May 2026 <br>
 
 ## Experience
 
-Private Contracting | Golds Gym Employee | 
-
-
+Private Contracting \| Golds Gym Employee \|
